@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./screens/Home";
+import Home from "./pages/Home";
 import Store, { StoreProvider } from "./services/store";
 
 const store = new Store();
