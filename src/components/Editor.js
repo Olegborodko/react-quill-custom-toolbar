@@ -86,8 +86,7 @@ class Editor extends Component {
 function customDropDown(title){
   const placeholderPickerItems = Array.prototype.slice.call(document.querySelectorAll(`.ql-${title} .ql-picker-item`));
 
-  placeholderPickerItems.forEach((item) => { 
-    console.log(item)
+  placeholderPickerItems.forEach((item) => {
     // console.log(item.getAttribute('data-label'))
     // data-value
     item.textContent = item.getAttribute('data-label')
