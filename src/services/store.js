@@ -1,52 +1,36 @@
 import React from "react";
-import { action, observable } from "mobx";
+import { action, observable, computed, configure } from "mobx";
+import axios from 'axios'
+axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT + '/api'
 
-/* Store start */
+configure({ enforceActions: 'observed' })
+
 export default class Store {
-  @observable title = "Coding is Love";
-
-  @observable user = {
-    userId: 1,
-    name: "Ranjith kumar",
-    website: "https://codingislove.com",
-    email: "ranjith@codingislove.com",
-  };
+  @observable listTokens = [];
 
   @action
-  setUser(user) {
-    this.user = user;
+  axiosGetTokens(){
+    const this_ = this
+    axios.get(`/tokens`)
+    .then(function (res) {
+      if (res && res.status === 200){
+        this_.setListTokens(res.data.body)
+      } else {
+        this_.clearTokens()
+      }
+    })
+    .catch(function (error) {
+      this_.clearTokens()
+    })
   }
 
   @action
-  updateUser(data) {
-    this.user = { ...this.user, ...data };
+  setListTokens(array) {
+    this.listTokens = array;
   }
 
   @action
-  clearUser() {
-    this.user = undefined;
-  }
-
-  @action
-  setTitle(title) {
-    this.title = title;
+  clearTokens() {
+    this.listTokens = []
   }
 }
-/* Store end */
-
-/* Store helpers */
-const StoreContext = React.createContext();
-
-export const StoreProvider = ({ children, store }) => {
-  return (
-    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
-  );
-};
-
-/* Hook to use store in any functional component */
-export const useStore = () => React.useContext(StoreContext);
-
-/* HOC to inject store to any functional or class component */
-export const withStore = (Component) => (props) => {
-  return <Component {...props} store={useStore()} />;
-};

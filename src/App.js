@@ -1,15 +1,16 @@
 import React from "react";
 import Home from "./pages/Home";
-import Store, { StoreProvider } from "./services/store";
+import Store from "./services/store";
+import { Provider } from "mobx-react";
 
 const store = new Store();
 /* Create a new store */
 
 function App() {
   return (
-    <StoreProvider store={store}>
+    <Provider store = {store}>
       <Home />
-    </StoreProvider>
+    </Provider>
   );
 }
 

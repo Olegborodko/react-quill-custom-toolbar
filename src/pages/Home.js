@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import "../App.css";
-import { observer } from "mobx-react";
-import { withStore } from "../services/store";
 import Editor from "../components/Editor";
+import { inject, observer } from "mobx-react";
 
-@withStore
+@inject('store')
 @observer
 class Home extends Component {
   render() {
     return (
-      <Editor/>
+      <Editor />
     );
   }
 }
