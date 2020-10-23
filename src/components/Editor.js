@@ -47,6 +47,15 @@ class Editor extends Component {
     }
   }
 
+  handleSubmit = () => {
+    this.props.store.axiosSaveMessages({
+      body: this.state.value
+    })
+    this.setState({
+      value: ''
+    })
+  }
+
   render() {
     const { value } = this.state;
     const { store } = this.props;
@@ -91,7 +100,7 @@ function customDropDown(title){
 }
 
 function tokens (args) {
-  const value = args;
+  const value = '#' + args;
   
   const cursorPosition = this.quill.getSelection().index
   this.quill.insertText(cursorPosition, value)

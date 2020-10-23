@@ -20,3 +20,9 @@ code {
   color:#ffffff;
   display:inline-block;
 }
+
+.width50{
+  width: 48%;
+  float:left;
+  padding: 10px;
+}

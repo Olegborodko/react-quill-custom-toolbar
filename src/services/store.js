@@ -7,7 +7,8 @@ configure({ enforceActions: 'observed' })
 
 export default class Store {
   @observable listTokens = [];
-
+  @observable messages = [];
+ 
   @action
   axiosGetTokens(){
     const this_ = this
@@ -32,5 +33,49 @@ export default class Store {
   @action
   clearTokens() {
     this.listTokens = []
+  }
+
+  @action
+  setMessages(array) {
+    this.messages = array
+  }
+
+  @action
+  addToMessages(obj) {
+    this.messages.push(obj)
+  }
+
+  @action
+  axiosGetMessages() {
+    const this_ = this
+    axios.get(`/messages`)
+    .then(function (res) {
+      if (res && res.status === 200){
+        this_.setMessages(res.data.body)
+      } else {
+        this_.setMessages([])
+      }
+    })
+    .catch(function (error) {
+      this_.setMessages([])
+    })
+  }
+
+  @action
+  axiosSaveMessages(obj) {
+    const this_ = this;
+    axios.post(`/messages`, obj)
+    .then(function (res) {
+      if (res && res.status === 200){
+        this_.addToMessages({
+          body: obj.body
+        })
+      } else {
+        
+      }
+    })
+    .catch(function (error) {
+      
+    })
   }
 }
