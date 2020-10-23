@@ -21,10 +21,10 @@ react-quill add custom Dropdown to Toolbar
 
 	or use default settings for development environment.
 	look knexfile.js
-		host : 'localhost',
-		user : 'usertest',
-		password : '111111',
-		database : 'mobx',
+		`host : 'localhost',`  <br>
+		`user : 'usertest',`  <br>
+		`password : '111111',`  <br>
+		`database : 'mobx',`
 
 3. run `NODE_ENV=production node src/api/app.js`
 	or `NODE_ENV=production run go`
