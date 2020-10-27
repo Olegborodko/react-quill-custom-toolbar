@@ -9,7 +9,9 @@ react-quill add custom Dropdown to Toolbar
 <br>
 
 ##### How to start
-1. git clone
+1. git clone <br>
+   yarn install
+
 2. create .env in root  <br>
     	`SERVER_PORT = 3000`  <br>
     	`DB_HOST = host`  <br>
@@ -26,5 +28,11 @@ react-quill add custom Dropdown to Toolbar
 		`password : '111111',`  <br>
 		`database : 'mobx',`
 
-3. run `NODE_ENV=production node src/api/app.js`  <br>
-	or `NODE_ENV=production run go`
+3. create database and run <br>
+	 `npx knex migrate:latest` <br>
+	 `npx knex seed:run`
+
+4. yarn build
+
+5. run `node src/api/app.js`  <br>
+	or `npm run go`
