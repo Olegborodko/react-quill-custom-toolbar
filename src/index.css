@@ -26,3 +26,15 @@ code {
   float:left;
   padding: 10px;
 }
+
+.ql-custom .ql-picker-item:before{
+  content: attr(data-label);
+}
+
+.ql-Tokens .ql-picker-label:before{
+  content: 'Tokens';
+}
+
+.ql-custom .ql-picker-label{
+  margin-right:36px;
+}

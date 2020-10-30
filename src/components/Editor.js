@@ -8,8 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 @observer
 class Editor extends Component {
   state ={
-    value: '',
-    componentReady: true
+    value: ''
   }
 
   modules = {
@@ -36,15 +35,6 @@ class Editor extends Component {
 
   componentDidMount() {
     this.props.store.axiosGetTokens();
-  }
-
-  componentDidUpdate() {
-    if (this.props.store.listTokens.length>0 && this.state.componentReady) {
-      customDropDown('Tokens')
-      this.setState({
-        componentReady: false
-      })
-    }
   }
 
   handleSubmit = () => {
@@ -81,21 +71,6 @@ class Editor extends Component {
       </>
     );
   }
-}
-
-function customDropDown(title){
-  const placeholderPickerItems = Array.prototype.slice.call(document.querySelectorAll(`.ql-${title} .ql-picker-item`));
-
-  placeholderPickerItems.forEach((item) => {
-    // console.log(item.getAttribute('data-label'))
-    // data-value
-    item.textContent = item.getAttribute('data-label')
-  });
-
-  document.querySelector(`.ql-${title} .ql-picker-label`).style.marginRight = "36px";
-  
-  document.querySelector(`.ql-${title} .ql-picker-label`).innerHTML
-      = title + document.querySelector(`.ql-${title} .ql-picker-label`).innerHTML;
 }
 
 function tokens (args) {
@@ -147,7 +122,7 @@ class CustomToolbar extends Component {
     </select>
     <button className="ql-link"></button>
     <button className="ql-clean"></button>
-    <select className="ql-Tokens">
+    <select className="ql-Tokens ql-custom">
     {this.props.tokens.map((el, index) => {
         return <option value={el.tag} key={el.id}>{el.title}</option>
     })}
